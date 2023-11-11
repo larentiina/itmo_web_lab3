@@ -4,31 +4,31 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.inject.Named;
 
-import javax.xml.namespace.QName;
+
 import java.io.Serializable;
 @Named
 @RequestScoped
 public class PointData implements Serializable {
-    private double coordinateY;
-    private double coordinateX;
+    private Double coordinateY;
+    private Double coordinateX;
     private double scaleR;
     private  boolean isHit;
     private  String currentDate;
     private  double scriptRunningTime;
 
-    public double getCoordinateY() {
+    public Double getCoordinateY() {
         return coordinateY;
     }
 
-    public void setCoordinateY(double coordinateY) {
+    public void setCoordinateY(Double coordinateY) {
         this.coordinateY = coordinateY;
     }
 
-    public double getCoordinateX() {
+    public Double getCoordinateX() {
         return coordinateX;
     }
 
-    public void setCoordinateX(double coordinateX) {
+    public void setCoordinateX(Double coordinateX) {
         this.coordinateX = coordinateX;
     }
 

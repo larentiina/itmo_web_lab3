@@ -12,8 +12,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://java.sun.com/jsf/composite"
       xmlns:display="http://java.sun.com/jsp/jstl/core"
+
 >
 
 
@@ -30,14 +32,13 @@
         <p>Кузенина Валерия Николаевна, группа: P3232, Вариант: 929292</p>
     </div>
     <div id="graph">
-        <ui:include src="/resources/svg/graph.svg" />
+        <ui:include id="Graph" src="/resources/svg/graph.svg" />
     </div>
 
     <div id="form">
         <h:form name="point_coordinates" id="point_coordinates" method="GET" action="#">
             <fieldset>
                 <p>Изменение X:</p>
-
                 <h:commandButton value="-2" type="button" styleClass="X"  onclick="chooseButton(this,'X')">
                 <f:ajax execute="@this" render="x" listener="#{pointData.setCoordinateX(-2)}" />
                 </h:commandButton>
@@ -62,21 +63,19 @@
                 <h:commandButton value="2" type="button" styleClass="X"  onclick="chooseButton(this,'X')">
                     <f:ajax execute="@this" render="x" listener="#{pointData.setCoordinateX(2)}" />
                 </h:commandButton>
-                <h:inputHidden  id="x" name="x" value="#{pointData.coordinateX}"  >
-                    <f:converter converterId="customDoubleConverter"/>
+                <h:inputHidden  id="x" name="x" value="#{pointData.coordinateX}" >
                     <f:validator validatorId="xValidator"/>
                 </h:inputHidden>
-                <h:message for="x" style="color:red" id="x_error" rendered="true" showDetail="true" />
-<!--                <span id="point_coordinates:x_error">Выберите значение X</span>-->
+               <span> <h:message for="x" style="color:red" id="x_error" rendered="true" showDetail="true" /></span>
+
                 <p>Изменение Y:
                     <h:inputText id="y" value="#{pointData.coordinateY}"  onfocus="this.value=''"  lenght="4">
                         <f:validator validatorId="yValidator"/>
                     </h:inputText>
 
                     <span><h:message for="y" style="color:red" id="y_error" rendered="true" showDetail="true" /></span>
-<!--                    <h:outputText value="#{pointBean.coordinateY} "/>-->
                 </p>
-                <p>Изменение R:
+                <div>Изменение R:
 
                 <h:commandLink value="1">
                     <f:ajax execute="@this" listener="#{pointData.setScaleR(1)}" render="r" onevent="drawGraph(1)"/>
@@ -94,14 +93,13 @@
                         <f:ajax execute="@this" render="r" onevent="drawGraph(3)"/>
                     </h:commandLink>
                     <h:inputHidden  id="r" name="r" value="#{pointData.scaleR}"  >
-<!--                        <f:converter converterId="customDoubleConverter"/>-->
                         <f:validator validatorId="rValidator"/>
                     </h:inputHidden>
-                   <span> <h:message for="r" style="color:red" id="r_error" rendered="true" showDetail="true" /></span>
-                </p>
+                    <span ><h:message for="r" style="color:red" id="r_error" rendered="true" showDetail="true" /></span>
+                </div>
                 <p>
                     <h:commandButton value="Отправить" type="submit" >
-                        <f:ajax execute="@form" resetValues="false" render="result_table y_error x_error r_error" listener="#{pointsList.addPoint()}"/>
+                        <f:ajax execute="@form" resetValues="false" render="result_table y_error x_error r_error"  listener="#{pointsList.addPoint()}"/>
                     </h:commandButton>
                     <h:commandButton value="Очистить" type="reset" id="clear_button">
                         <f:ajax execute="@form" render="result_table" listener="#{pointsList.clearList()}"/>
@@ -113,44 +111,41 @@
     <div id="points_table">
         <h:dataTable id="result_table" value="#{pointsList.getPointsList()}" var="result">
             <h:column>
-                <!-- column header -->
                 <f:facet name="header">X</f:facet>
                 #{result.coordinateX}
             </h:column>
             <h:column>
-                <!-- column header -->
                 <f:facet name="header">Y</f:facet>
-                <!-- row record -->
                 #{result.coordinateY}
             </h:column>
             <h:column>
-                <!-- column header -->
                 <f:facet name="header">R</f:facet>
-                <!-- row record -->
                 #{result.scaleR}
             </h:column>
             <h:column>
-                <!-- column header -->
                 <f:facet name="header">Попал/Промазал</f:facet>
-                <!-- row record -->
                 #{result.isHit ? "Попал" : "Промазал" }
             </h:column>
             <h:column>
-                <!-- column header -->
                 <f:facet name="header">Текущее время</f:facet>
-                <!-- row record -->
                 #{result.currentDate}
             </h:column>
             <h:column>
-                <!-- column header -->
                 <f:facet name="header">Время работы скрипта</f:facet>
-                <!-- row record -->
                 #{result.scriptRunningTime}
 
             </h:column>
         </h:dataTable>
     </div>
-    <h:outputScript library="js" name="graph.js" />
+        <h:outputScript library="js" name="graph.js"/>
+
+            <ui:repeat value="#{pointsList.getPointsList()}" id="points" var="point" >
+                <h:outputScript>
+                createPoint(#{28*point.coordinateX+150},#{(28*point.coordinateY-150)*(-1)});
+                </h:outputScript>
+            </ui:repeat>
+
+
     <h:outputScript library="js" name="main.js" />
     <h:outputScript library="js" name="result_table.js" />
     <h:outputScript library="js" name="form.js" />

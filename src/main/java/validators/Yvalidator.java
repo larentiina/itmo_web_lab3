@@ -11,8 +11,8 @@ import jakarta.faces.validator.ValidatorException;
 @FacesValidator("yValidator")
 public class Yvalidator implements Validator<Double> {
 
-    private static final double Y_MAX = 2.0;
-    private static final double Y_MIN = -5.0;
+    private static final double Y_MAX = 5.0;
+    private static final double Y_MIN = -3.0;
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Double object) throws ValidatorException {

@@ -1,7 +1,10 @@
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.SessionScoped;
+
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -9,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
-@SessionScoped
+@ApplicationScoped
 @Named
 public class PointsList implements Serializable {
     @Inject
@@ -26,12 +29,11 @@ public class PointsList implements Serializable {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         point.setCurrentDate(dateFormat.format(date));
-        System.out.println(2);
-        System.out.println(dateFormat.format(date));
         long endTime = System.currentTimeMillis();
         double totalTime = (double)(endTime - startTime)/1000;
         point.setScriptRunningTime(totalTime);
         pointsList.add(point);
+
     }
 
     public LinkedList<PointData> getPointsList() {

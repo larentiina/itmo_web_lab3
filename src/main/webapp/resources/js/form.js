@@ -1,33 +1,29 @@
 
-let R,Y;
-const X = document.getElementById("X");
-
-const buttonClear = document.getElementById("clear_button");
-/*buttonClear.addEventListener("click",(event)=>{
-    request(actionClear,null,null,null);
-});*/
-
-/*X.addEventListener("input",function (event){
-        let value = Number(X.value.replace(",", "."));
-        if (!isFinite(value)) {
-                X.setCustomValidity("Неверный ввод. Нужно ввести число");
-        } else if(value>5 || value<-3){
-            X.setCustomValidity("Неверный ввод. Диапозон числа от -3 до 5");
-        } else {
-            X.setCustomValidity("");
-        }
+const R = document.getElementById("point_coordinates:r");
+const X = document.getElementById("point_coordinates:x");
+const Y = document.getElementById("point_coordinates:y");
+const btn_clear=document.querySelector("input[type=reset]")
+const btn_submit=document.querySelector("input[type=submit]")
+btn_submit.addEventListener('click',evt => {
+    let x=X.value;
+    console.log(x)
+    let y=Y.value;
+    console.log(y)
+    console.log(X.value)
+    if(checkY()&&checkX()&&checkR()) {
+        createPoint(scaleR * x + Ox, (scaleR * y - Oy) * (-1));
     }
-);*/
-[...document.getElementsByClassName(className)].length
+})
+btn_clear.addEventListener('click',evt => {
+    clearPoints();
+})
 function chooseButton(element,className){
     if(className==='R') {
         R = element.value;
         deleteGraph();
         drawGraph(element.value);
     }
-    if(className==='Y') {
-        Y = element.value;
-    }
+
     console.log(className);
     [...document.getElementsByClassName(className)].forEach(function (btn){
         btn.style.backgroundColor="#ffffff";
@@ -36,14 +32,17 @@ function chooseButton(element,className){
     });
     element.style.backgroundColor="rgb(112,84,232)";
     element.style.color="#ffffff";
-    console.log(R)
+
 
 }
 function checkR(){
-    return(R!==undefined);
+    return(R.value>=1);
+}
+function checkX(){
+    return(X.value>=-2 && X.value<=2);
 }
 function checkY(){
-    return(R!==undefined);
+    return(Y.value>=-3 && Y.value<=5);
 }
 
 
