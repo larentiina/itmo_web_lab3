@@ -16,12 +16,6 @@ public class Rvalidator implements Validator<Double> {
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Double object) throws ValidatorException {
-        if (object == null) {
-            throw new ValidatorException(
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, null,
-                            "Введите значение координаты R"));
-        }
-
         if (object > R_MAX || object < R_MIN) {
             throw new ValidatorException(
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, null,

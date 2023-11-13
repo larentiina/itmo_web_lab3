@@ -1,19 +1,32 @@
+package models;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.inject.Named;
+import jakarta.persistence.*;
 
 
 import java.io.Serializable;
 @Named
-@RequestScoped
+@ApplicationScoped
+@Entity
 public class PointData implements Serializable {
+    @Id
+    @GeneratedValue
+    private int id;
+   @Column(nullable = false)
     private Double coordinateY;
+   @Column(nullable = false)
     private Double coordinateX;
+   @Column(nullable = false)
     private double scaleR;
+    @Column(nullable = false)
     private  boolean isHit;
+    @Column(nullable = false)
     private  String currentDate;
+    @Column(nullable = false)
     private  double scriptRunningTime;
 
     public Double getCoordinateY() {
@@ -62,5 +75,21 @@ public class PointData implements Serializable {
 
     public void setScriptRunningTime(double scriptRunningTime) {
         this.scriptRunningTime = scriptRunningTime;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isHit() {
+        return isHit;
+    }
+
+    public void setHit(boolean hit) {
+        isHit = hit;
     }
 }

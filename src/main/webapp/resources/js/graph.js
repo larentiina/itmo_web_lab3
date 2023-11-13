@@ -19,7 +19,7 @@ graph.addEventListener('click',event => {
     document.getElementById("point_coordinates:j_idt34").click();
 });
 
-function createPoint(x,y){
+function createPoint(x,y,r){
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         circle.setAttribute("cx", x);
         circle.setAttribute("cy", y);
@@ -28,7 +28,7 @@ function createPoint(x,y){
         circle.setAttribute("stroke", "orange");
         circle.setAttribute("stroke-width", "1");
         circle.setAttribute("opacity", "1");
-    if(!checkArea(x,y,R.value)) {
+    if(!checkArea(x,y,r)) {
         circle.setAttribute("fill", "red")
     } else circle.setAttribute("fill", "yellow")
         svg.appendChild(circle);
@@ -105,7 +105,7 @@ function checkArea(x,y,r){
             return true;
         } else if (Math.abs(x)<=(r) && Math.abs(y)<=r && x<=0 && y<=0) {
             return true;
-        } else return y <= -x + r/2 && x >= 0 && y >= 0;
+        } else return y <= -0.5*x + r/2 && x >= 0 && y >= 0;
 
 }
 function deleteGraph(){

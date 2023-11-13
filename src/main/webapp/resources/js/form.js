@@ -11,7 +11,7 @@ btn_submit.addEventListener('click',evt => {
     console.log(y)
     console.log(X.value)
     if(checkY()&&checkX()&&checkR()) {
-        createPoint(scaleR * x + Ox, (scaleR * y - Oy) * (-1));
+        createPoint(scaleR * x + Ox, (scaleR * y - Oy) * (-1),R.value);
     }
 })
 btn_clear.addEventListener('click',evt => {

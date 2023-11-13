@@ -35,6 +35,16 @@ th, td {
 .hidden {
     display: none;
 }
+.link_to_page{
+    margin-right: 10px;
+    font-size:20px;
+    color: rgb(112,84,232);
+    background-color: white;
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 

@@ -1,9 +1,14 @@
+package models;
 
+import db.DataBaseManager;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.SessionScoped;
 
+import jakarta.enterprise.inject.Model;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
+import models.PointData;
+import utils.AreaChecker;
 
 
 import java.io.Serializable;
@@ -11,13 +16,25 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 @ApplicationScoped
 @Named
+@Model
 public class PointsList implements Serializable {
     @Inject
     private PointData pointData;
-    private LinkedList<PointData> pointsList = new LinkedList<>();
+    private DataBaseManager dbManager;
+
+    private List<PointData> pointsList;
+
+    public PointsList() {
+        pointData = new PointData();
+        pointsList = new LinkedList<>();
+        dbManager = new DataBaseManager();
+        pointsList = dbManager.loadPoints();
+    }
+
 
     public void addPoint(){
         long startTime = System.currentTimeMillis();
@@ -33,15 +50,15 @@ public class PointsList implements Serializable {
         double totalTime = (double)(endTime - startTime)/1000;
         point.setScriptRunningTime(totalTime);
         pointsList.add(point);
+        dbManager.savePoint(point);
 
     }
-
-    public LinkedList<PointData> getPointsList() {
-
+    public List<PointData> getPointsList() {
         return pointsList;
     }
     public String clearList(){
         pointsList = new LinkedList<>();
+        dbManager.clearPoints();
         return null;
     }
 
