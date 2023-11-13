@@ -16,7 +16,7 @@ graph.addEventListener('click',event => {
     console.log(`Переведенные координаты: x=${x}, y=${y}, r=${R}`);
     document.getElementById("point_coordinates:y").setAttribute("value",y)
     document.getElementById("point_coordinates:x").setAttribute("value",x)
-    document.getElementById("point_coordinates:j_idt34").click();
+    document.getElementById("point_coordinates:j_idt33").click();
 });
 
 function createPoint(x,y,r){

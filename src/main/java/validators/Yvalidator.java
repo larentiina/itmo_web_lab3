@@ -19,14 +19,14 @@ public class Yvalidator implements Validator<Double> {
             if (object == null) {
                 throw new ValidatorException(
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, null,
-                                "Введите значение координаты Y"));
+                                "Введите корректное значение координаты Y"));
             }
-
             if (object > Y_MAX || object < Y_MIN) {
                 throw new ValidatorException(
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, null,
                                 "Значение Y выходит за пределы [-3;5]"));
             }
+
 
     }
 }

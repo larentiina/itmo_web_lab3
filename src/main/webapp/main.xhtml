@@ -63,6 +63,7 @@
 
                 <p>Изменение Y:
                     <h:inputText id="y" value="#{pointData.coordinateY}" a:placeholder="[-3;5]"  onfocus="this.value=''"  lenght="4">
+                        <f:converter converterId="doubleConverter"/>
                         <f:validator validatorId="yValidator"/>
                     </h:inputText>
 
