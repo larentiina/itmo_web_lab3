@@ -14,6 +14,7 @@ import utils.AreaChecker;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,19 +25,18 @@ import java.util.List;
 public class PointsList implements Serializable {
     @Inject
     private PointData pointData;
-    private DataBaseManager dbManager;
+    private final DataBaseManager dbManager;
 
     private List<PointData> pointsList;
 
     public PointsList() {
         pointData = new PointData();
-        pointsList = new LinkedList<>();
         dbManager = new DataBaseManager();
-        pointsList = dbManager.loadPoints();
+        pointsList = Collections.synchronizedList(dbManager.loadPoints());
     }
 
 
-    public void addPoint(){
+    public synchronized void addPoint(){
         long startTime = System.currentTimeMillis();
         PointData point = new PointData();
         point.setCoordinateX(pointData.getCoordinateX());
@@ -53,10 +53,10 @@ public class PointsList implements Serializable {
         dbManager.savePoint(point);
 
     }
-    public List<PointData> getPointsList() {
+    public synchronized List<PointData> getPointsList() {
         return pointsList;
     }
-    public String clearList(){
+    public synchronized String clearList(){
         pointsList = new LinkedList<>();
         dbManager.clearPoints();
         return null;
