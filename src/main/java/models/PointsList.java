@@ -37,6 +37,7 @@ public class PointsList implements Serializable {
 
 
     public synchronized void addPoint(){
+        System.out.println("add");
         long startTime = System.currentTimeMillis();
         PointData point = new PointData();
         point.setCoordinateX(pointData.getCoordinateX());
@@ -56,8 +57,9 @@ public class PointsList implements Serializable {
     public synchronized List<PointData> getPointsList() {
         return pointsList;
     }
-    public synchronized String clearList(){
-        pointsList = new LinkedList<>();
+    public String clearList(){
+        System.out.println("clear");
+        pointsList = Collections.synchronizedList(new LinkedList<>());
         dbManager.clearPoints();
         return null;
     }

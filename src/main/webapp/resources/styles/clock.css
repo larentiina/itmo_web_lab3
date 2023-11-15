@@ -1,0 +1,22 @@
+.clockpage
+{
+    margin: auto;
+    max-width: 500px;
+    min-width: 100px;
+    background: white;
+    text-align: center;
+    font-family: Courier, serif;
+    border-radius: 7px;
+    font-size: 50px;
+    padding: 10px;
+    font-weight: bold;
+    border-top: 10px solid rgb(112,84,232);
+    border-bottom: 10px solid rgb(112,84,232);
+    margin-top: 3%;
+}
+#date
+{
+    display: block;
+    font-weight: normal;
+    font-size: 50px;
+}

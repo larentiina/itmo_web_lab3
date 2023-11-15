@@ -2,7 +2,7 @@
 const R = document.getElementById("point_coordinates:r");
 const X = document.getElementById("point_coordinates:x");
 const Y = document.getElementById("point_coordinates:y");
-const btn_clear=document.querySelector("input[type=reset]")
+const btn_clear=document.getElementById("point_coordinates:clear_button")
 const btn_submit=document.querySelector("input[type=submit]")
 btn_submit.addEventListener('click',evt => {
     let x=X.value;

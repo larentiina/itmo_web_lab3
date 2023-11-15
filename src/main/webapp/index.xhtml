@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>StartPage</title>
+    <h:outputStylesheet library="styles" name="general.css" />
+    <h:outputStylesheet library="styles" name="clock.css" />
+    <h:outputScript library="js" name="clock.js"/>
+</h:head>
+
+<h:body onload="clockTimer();">
+    <div id="title">
+        <p>Кузенина Валерия Николаевна, группа: P3232, Вариант: 929292</p>
+    </div>
+    <div class="clockpage">
+        <span id="clock"></span>
+        <span id="date"></span>
+
+    </div>
+    <h:link outcome="goToMain" styleClass="link_to_page" >Перейти на главную страницу </h:link>
+</h:body>
+
+</html>
