@@ -1,19 +1,20 @@
 
 const R = document.getElementById("point_coordinates:r");
 const X = document.getElementById("point_coordinates:x");
+let X_GRAPH = document.getElementById("point_coordinates:x_from_graph");
 const Y = document.getElementById("point_coordinates:y");
+let Y_GRAPH = document.getElementById("point_coordinates:y_from_graph");
 const btn_clear=document.getElementById("point_coordinates:clear_button")
-const btn_submit=document.querySelector("input[type=submit]")
+const btn_submit=document.getElementById("point_coordinates:submit_button");
 btn_submit.addEventListener('click',evt => {
     let x=X.value;
-    console.log(x)
     let y=Y.value;
-    console.log(y)
-    console.log(X.value)
-    if(checkY()&&checkX()&&checkR()) {
-        createPoint(scaleR * x + Ox, (scaleR * y - Oy) * (-1),R.value);
-    }
-})
+
+        if (checkY() && checkX() && checkR()) {
+            createPoint(scaleR * x + Ox, (scaleR * y - Oy) * (-1), R.value);
+        }
+
+});
 btn_clear.addEventListener('click',evt => {
     clearPoints();
 })

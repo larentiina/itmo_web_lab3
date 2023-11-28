@@ -8,6 +8,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:a="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
 
 >
 
@@ -56,9 +57,12 @@
                 <h:commandButton value="2" type="button" styleClass="X"  onclick="chooseButton(this,'X')">
                     <f:ajax execute="@this" render="x" listener="#{pointData.setCoordinateX(2)}" />
                 </h:commandButton>
+
                 <h:inputHidden  id="x" name="x" value="#{pointData.coordinateX}" >
                     <f:validator validatorId="xValidator"/>
                 </h:inputHidden>
+
+
                <span> <h:message for="x" style="color:red" id="x_error" rendered="true" showDetail="true" /></span>
 
                 <p>Изменение Y:
@@ -66,6 +70,7 @@
                         <f:converter converterId="doubleConverter"/>
                         <f:validator validatorId="yValidator"/>
                     </h:inputText>
+
 
                     <span><h:message for="y" style="color:red" id="y_error" rendered="true" showDetail="true" /></span>
                 </p>
@@ -92,7 +97,7 @@
                     <span ><h:message for="r" style="color:red" id="r_error" rendered="true" showDetail="true" /></span>
                 </div>
                 <p>
-                    <h:commandButton value="Отправить" type="submit" >
+                    <h:commandButton value="Отправить" type="submit" id="submit_button" >
                         <f:ajax execute="@form" resetValues="false" render="result_table y_error x_error r_error"  listener="#{pointsList.addPoint()}"/>
                     </h:commandButton>
                     <h:commandButton value="Очистить" type="reset" id="clear_button">
@@ -100,6 +105,17 @@
                     </h:commandButton>
                 </p>
             </fieldset>
+        </h:form>
+        <h:form id="graphSelect">
+            <h:inputHidden id="graph_x" value="#{pointData.coordinateX}">
+            </h:inputHidden>
+            <h:inputHidden id="graph_y" value="#{pointData.coordinateY}">
+            </h:inputHidden>
+            <h:inputHidden id="graph_r" value="#{pointData.scaleR}">
+            </h:inputHidden>
+            <h:commandButton value="Отправить" type="submit" id="submit_from_graph_button" style="display: none;" >
+                <f:ajax execute="@form" resetValues="false" render="result_table r_error"  listener="#{pointsList.addPoint()}"/>
+            </h:commandButton>
         </h:form>
     </div>
     <div id="points_table">

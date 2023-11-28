@@ -3,6 +3,7 @@ const svg = document.querySelector('svg');
 const Ox = 150;
 const Oy = 150;
 const scaleR = 28;
+let value_from_form = false;
 
 
 graph.addEventListener('click',event => {
@@ -14,12 +15,17 @@ graph.addEventListener('click',event => {
     const x = transformCoordinate(point.x).toFixed(4);
     const y = -1*transformCoordinate(point.y).toFixed(4)
     console.log(`Переведенные координаты: x=${x}, y=${y}, r=${R}`);
-    document.getElementById("point_coordinates:y").setAttribute("value",y)
-    document.getElementById("point_coordinates:x").setAttribute("value",x)
-    document.getElementById("point_coordinates:j_idt33").click();
+    const rValue = document.getElementById("graphSelect:graph_r");
+
+    document.getElementById("graphSelect:graph_x").value = x;
+    document.getElementById("graphSelect:graph_y").value = y;
+    rValue.value = R.value;
+    createPoint(point.x,point.y,R.value);
+    document.getElementById("graphSelect:submit_from_graph_button").click();
 });
 
 function createPoint(x,y,r){
+
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         circle.setAttribute("cx", x);
         circle.setAttribute("cy", y);
@@ -29,6 +35,7 @@ function createPoint(x,y,r){
         circle.setAttribute("stroke-width", "1");
         circle.setAttribute("opacity", "1");
     if(!checkArea(x,y,r)) {
+
         circle.setAttribute("fill", "red")
     } else circle.setAttribute("fill", "yellow")
         svg.appendChild(circle);
