@@ -1,23 +1,28 @@
 
 function clockTimer()
 {
-    var date = new Date();
+    const date = new Date();
+    const currentDate = new Date();
+    const TIMEOUT=13000;
 
-    var time = [date.getHours(),date.getMinutes(),date.getSeconds()];
-    var dayOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-    var days = date.getDay();
-    var date_arr =[date.getDay(),date.getMonth(),date.getFullYear()]
+    const YEAR = currentDate.getFullYear();
+    const MONTH = currentDate.getMonth() + 1;
+    const DAY = currentDate.getDate();
+
+    const time = [currentDate.getHours(),currentDate.getMinutes(),currentDate.getSeconds()];
+    const dayOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    const days = date.getDay();
 
     if(time[0] < 10){time[0] = "0"+ time[0];}
     if(time[1] < 10){time[1] = "0"+ time[1];}
     if(time[2] < 10){time[2] = "0"+ time[2];}
 
-    var current_time = [time[0],time[1],time[2]].join(':');
-    var clock = document.getElementById("clock");
-    var current_date=dayOfWeek[days]+","+[date_arr[0],date_arr[1],date_arr[2]].join('.')
+    const current_time = [time[0],time[1],time[2]].join(':');
+    const clock = document.getElementById("clock");
+    const current_date=dayOfWeek[days]+","+[DAY,MONTH,YEAR].join('.')
 
     clock.innerHTML = current_time;
     document.getElementById("date").innerHTML = current_date;
 
-    setTimeout("clockTimer()", 13000);
+    setTimeout("clockTimer()", TIMEOUT);
 }
